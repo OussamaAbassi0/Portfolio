@@ -1,0 +1,420 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TOKENS — palette dérivée par échantillonnage de la vidéo hero
+   13 frames, clustering HSV. Cramoisi = rim light du sujet,
+   violet/indigo = ombres froides, noir-magenta = fond.
+   Déclarée en OKLCH : gamut P3 sur écrans compatibles.
+   ============================================================ */
+@theme {
+  --color-void: oklch(0.13 0.03 320);
+  --color-abyss: oklch(0.18 0.045 318);
+  --color-slate: oklch(0.23 0.05 310);
+  --color-edge: oklch(0.32 0.055 305);
+
+  --color-crimson: oklch(0.58 0.215 12);
+  --color-magenta: oklch(0.65 0.245 350);
+  --color-violet: oklch(0.58 0.235 295);
+  --color-indigo: oklch(0.48 0.22 285);
+  --color-cyan: oklch(0.8 0.14 195);
+
+  --color-bright: oklch(0.97 0.005 320);
+  --color-dim: oklch(0.72 0.02 315);
+  --color-faint: oklch(0.55 0.025 315);
+
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: linear(0, 0.36 8%, 0.79 17%, 1.02 25%, 1.06 32%, 1 45%, 0.99 60%, 1);
+
+  --radius-card: 1rem;
+  --radius-field: 0.75rem;
+}
+
+/* Propriétés animables — impossible avant @property */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@property --glow {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: false;
+}
+
+:root {
+  --aurora: linear-gradient(
+    115deg,
+    var(--color-crimson) 0%,
+    var(--color-magenta) 28%,
+    var(--color-violet) 62%,
+    var(--color-indigo) 100%
+  );
+  --glass-bg: color-mix(in oklch, var(--color-slate) 52%, transparent);
+  --glass-border: color-mix(in oklch, white 11%, transparent);
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --shell: 1360px;
+  --nav-h: 4.5rem;
+
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  accent-color: var(--color-magenta);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto; }
+}
+
+* { min-width: 0; }
+
+html {
+  background: var(--color-void);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-void);
+  color: var(--color-bright);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+  font-weight: 800;
+}
+
+p { text-wrap: pretty; }
+
+::selection {
+  background: var(--color-magenta);
+  color: var(--color-void);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   PRIMITIVES
+   ============================================================ */
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(5rem, 13vh, 11rem);
+  position: relative;
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid var(--glass-border);
+}
+
+/* Repli opaque si backdrop-filter indisponible : jamais de texte illisible */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass { background: oklch(0.21 0.05 312); }
+}
+
+.text-aurora {
+  background: var(--aurora);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+}
+
+.rule {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklch, var(--color-edge) 80%, transparent) 20%,
+    color-mix(in oklch, var(--color-edge) 80%, transparent) 80%,
+    transparent
+  );
+}
+
+/* Anneau conique lumineux au survol — @property rend l'angle animable */
+.ring-aurora {
+  position: relative;
+  isolation: isolate;
+}
+.ring-aurora::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 0%,
+    var(--color-crimson) 12%,
+    var(--color-magenta) 22%,
+    var(--color-violet) 32%,
+    transparent 45%
+  );
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-out-expo);
+  pointer-events: none;
+  z-index: 2;
+}
+.ring-aurora:hover::before,
+.ring-aurora:focus-within::before {
+  opacity: 1;
+  animation: spin-angle 3.2s linear infinite;
+}
+@keyframes spin-angle {
+  to { --angle: 360deg; }
+}
+
+/* Projecteur qui suit le curseur dans une carte */
+.spotlight { position: relative; }
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in oklch, var(--color-magenta) 16%, transparent),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-expo);
+  pointer-events: none;
+}
+.spotlight:hover::after { opacity: 1; }
+
+/* Halo diffus — jamais de box-shadow coloré (flou, coûteux, daté) */
+.halo {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(0px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Dérive lente des halos aurora — transform uniquement, composé par le GPU */
+@keyframes drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(6vw, 4vw, 0) scale(1.12); }
+}
+@keyframes drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.06); }
+  50% { transform: translate3d(-7vw, 5vw, 0) scale(0.94); }
+}
+@keyframes drift-c {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-5vw, 6vw, 0) scale(1.14); }
+}
+@keyframes drift-d {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.08); }
+  50% { transform: translate3d(8vw, -4vw, 0) scale(0.96); }
+}
+.drift-a { animation: drift-a 26s ease-in-out infinite; will-change: transform; }
+.drift-b { animation: drift-b 32s ease-in-out infinite; will-change: transform; }
+.drift-c { animation: drift-c 29s ease-in-out infinite; will-change: transform; }
+.drift-d { animation: drift-d 35s ease-in-out infinite; will-change: transform; }
+
+/* Grain : casse le banding des dégradés sombres */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   ANIMATIONS PILOTÉES PAR LE SCROLL — natives, hors thread principal
+   ============================================================ */
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes reveal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes draw-line {
+  from { stroke-dashoffset: var(--len, 1000); }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes fill-progress {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 32%;
+  }
+  .reveal-soft {
+    animation: reveal-fade linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 26%;
+  }
+  .progress-line {
+    animation: fill-progress linear both;
+    animation-timeline: scroll(nearest);
+    transform-origin: top;
+  }
+}
+
+/* Repli : navigateurs sans scroll-driven animations.
+   .is-in est posé par un IntersectionObserver minimal. */
+@supports not (animation-timeline: view()) {
+  .reveal, .reveal-soft {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+  }
+  .reveal.is-in, .reveal-soft.is-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.stagger > * { animation-delay: calc(var(--i, 0) * 45ms); }
+
+/* Parallax de la boucle vidéo — indexé sur le scroll, natif */
+@keyframes parallax-shift {
+  from { transform: translate3d(0, -8%, 0) scale(1.18); }
+  to { transform: translate3d(0, 8%, 0) scale(1.18); }
+}
+.parallax-loop { transform: scale(1.18); }
+@supports (animation-timeline: view()) {
+  .parallax-loop {
+    animation: parallax-shift linear both;
+    animation-timeline: view();
+    animation-range: cover 0% cover 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .parallax-loop { animation: none; transform: scale(1.05); }
+}
+
+/* Marquee — arrêtable au survol ET au focus clavier */
+@keyframes marquee-slide {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+.marquee-track {
+  animation: marquee-slide linear infinite;
+  will-change: transform;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track,
+.marquee:focus .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .marquee { overflow-x: auto; }
+}
+
+/* Schémas d'architecture : le trait se dessine, les nœuds s'allument à la suite */
+@keyframes draw-arch {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes light-node {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.arch-line { stroke-dasharray: 100; stroke-dashoffset: 100; }
+.arch-node { opacity: 0; }
+.arch-dot { opacity: 0.85; }
+
+@supports (animation-timeline: view()) {
+  .arch-line {
+    animation: draw-arch linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 45%;
+  }
+  .arch-node {
+    animation: light-node linear both;
+    animation-timeline: view();
+    animation-range: entry calc(22% + var(--i, 0) * 4%) cover calc(42% + var(--i, 0) * 4%);
+  }
+}
+@supports not (animation-timeline: view()) {
+  .arch-line, .arch-node { animation: none; opacity: 1; stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .arch-line { stroke-dashoffset: 0 !important; }
+  .arch-node { opacity: 1 !important; transform: none !important; }
+}
+
+/* ============================================================
+   ACCESSIBILITÉ — le mouvement est un confort, jamais un prérequis
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    animation-timeline: none !important;
+  }
+  .reveal, .reveal-soft {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .ring-aurora::before { animation: none; }
+}
+
+/* Transitions de vue natives entre documents */
+@view-transition { navigation: auto; }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.42s;
+  animation-timing-function: var(--ease-out-expo);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
