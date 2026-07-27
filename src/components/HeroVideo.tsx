@@ -150,7 +150,7 @@ export default function HeroVideo({ alt }: { alt: string }) {
         style={{
           background:
             "linear-gradient(150deg, var(--color-crimson) 0%, var(--color-magenta) 45%, var(--color-violet) 100%)",
-          opacity: 0.42,
+          opacity: 0.26,
         }}
       />
       <div
@@ -158,7 +158,7 @@ export default function HeroVideo({ alt }: { alt: string }) {
         className="pointer-events-none absolute inset-0 mix-blend-soft-light"
         style={{
           background:
-            "radial-gradient(70% 50% at 68% 26%, color-mix(in oklch, var(--color-magenta) 70%, transparent), transparent 70%)",
+            "radial-gradient(70% 50% at 68% 26%, color-mix(in oklch, var(--color-magenta) 45%, transparent), transparent 70%)",
         }}
       />
       <div

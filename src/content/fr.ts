@@ -49,14 +49,14 @@ export const fr: Dict = {
         title: "Automatisation IA",
         line: "n8n, agents autonomes, LLM en production. Les tâches répétitives disparaissent du planning.",
         caseSlug: "bastide",
-        span: "wide",
+        span: "tall",
       },
       {
         key: "dashboards",
         title: "Dashboards & control centers",
         line: "Une interface pour piloter un système, pas pour l'admirer.",
         caseSlug: "lvi-control-center",
-        span: "tall",
+        span: "unit",
       },
       {
         key: "web",

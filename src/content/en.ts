@@ -49,14 +49,14 @@ export const en: Dict = {
         title: "AI automation",
         line: "n8n, autonomous agents, LLMs in production. Repetitive work disappears from the calendar.",
         caseSlug: "bastide",
-        span: "wide",
+        span: "tall",
       },
       {
         key: "dashboards",
         title: "Dashboards & control centers",
         line: "An interface built to operate a system, not to admire it.",
         caseSlug: "lvi-control-center",
-        span: "tall",
+        span: "unit",
       },
       {
         key: "web",

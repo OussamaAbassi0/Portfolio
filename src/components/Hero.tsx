@@ -6,10 +6,10 @@ export default function Hero({ d }: { d: Dict }) {
   const [l1, l2, l3] = d.hero.title;
 
   return (
-    <section className="relative isolate overflow-hidden pb-16 pt-32 md:pb-24 md:pt-40">
+    <section className="relative isolate overflow-hidden pb-12 pt-28 md:pb-16 md:pt-36">
       <Aurora />
 
-      <div className="shell relative grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
+      <div className="shell relative grid items-center gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-14">
         <div>
           <p className="glass mb-7 inline-flex items-center gap-2.5 rounded-full px-4 py-2">
             <span className="relative flex size-1.5">
@@ -19,7 +19,7 @@ export default function Hero({ d }: { d: Dict }) {
             <span className="label !text-dim">{d.hero.badge}</span>
           </p>
 
-          <h1 className="text-[clamp(2.75rem,7.5vw,5.75rem)]">
+          <h1 className="text-[clamp(2.4rem,5.4vw,4.4rem)]">
             <span className="block">{l1}</span>
             <span className="block">
               {l2} <span className="text-aurora">{d.hero.accent}</span>
@@ -27,9 +27,9 @@ export default function Hero({ d }: { d: Dict }) {
             <span className="block">{l3}</span>
           </h1>
 
-          <p className="mt-7 max-w-[46ch] text-lg leading-relaxed text-dim">{d.hero.sub}</p>
+          <p className="mt-6 max-w-[46ch] text-lg leading-relaxed text-dim">{d.hero.sub}</p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
               href="#contact"
               className="rounded-full px-7 py-4 text-sm font-medium text-white transition-transform duration-200 active:scale-[0.97]"
@@ -45,7 +45,7 @@ export default function Hero({ d }: { d: Dict }) {
             </a>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/8 pt-6">
+          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/8 pt-5">
             <span className="flex items-center gap-1.5 font-mono text-sm text-magenta">
               <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden>
                 <path d="M8 1l2.06 4.44L15 6.1l-3.6 3.36.9 4.94L8 12.1l-4.3 2.3.9-4.94L1 6.1l4.94-.66L8 1z" />
@@ -60,7 +60,7 @@ export default function Hero({ d }: { d: Dict }) {
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
+        <div className="relative mx-auto w-full max-w-[19rem] sm:max-w-[21rem] lg:ml-auto lg:mr-0 lg:max-w-[23rem]">
           <HeroVideo alt={d.meta.title} />
         </div>
       </div>

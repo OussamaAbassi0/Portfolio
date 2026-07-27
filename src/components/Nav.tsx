@@ -62,7 +62,7 @@ export default function Nav({ d, locale }: { d: Dict; locale: Locale }) {
         >
           <div
             className={`flex items-center justify-between gap-4 rounded-full py-2 pl-5 pr-2 transition-colors duration-300 ${
-              solid ? "glass" : "border border-transparent"
+              solid ? "nav-solid" : "border border-transparent"
             }`}
           >
             <Link
