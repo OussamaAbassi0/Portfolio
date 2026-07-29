@@ -99,7 +99,39 @@ Aucun tarif affiché, conformément à ta consigne — la facturation est expliq
 
 ---
 
-## 8. Reste à faire
+## 8. Mention « B2B » retirée partout
+
+Tu travailles avec tout le monde, le site ne devait pas te ranger dans une case. Treize occurrences supprimées :
+
+| Emplacement | Avant | Après |
+|---|---|---|
+| Bandeau de chiffres | « pipeline B2B en production » | « pipeline commercial en production » |
+| À propos | « je travaille avec des équipes B2B partout en Europe » | « PME industrielles, plateformes grand public, indépendants, startups. La taille et le secteur changent, le point de départ est toujours le même » |
+| Avis de Maxime | « prospection B2B » | « prospection commerciale » |
+| Étude LVI | « Prospection B2B autonome » | « Prospection commerciale autonome » |
+| Étude B&C | « Enrichissement B2B » | « Enrichissement de données » |
+| Étude LeadScout | « Agent autonome B2B » | « Agent autonome de prospection » |
+| Base du chatbot | « pipeline commercial B2B » | « pipeline commercial » |
+
+J'ai préféré retirer la mention plutôt qu'écrire « B2B et B2C » : nommer les deux sonne comme une case cochée, alors qu'énumérer les types de clients réels raconte quelque chose. Une règle a été ajoutée au chatbot : ne jamais présenter Oussama comme réservé au B2B.
+
+---
+
+## 9. Fuite de confidentialité corrigée dans le chatbot
+
+**Défaut trouvé en relisant le code** : la base de connaissance de l'assistant contenait encore les informations que nous venions de retirer du site — le nom du client de la place de marché d'art et les quatre maisons de vente, nommés explicitement.
+
+Le site était propre, mais un visiteur qui aurait demandé « pour qui as-tu fait le projet d'art ? » aurait obtenu la réponse. Un modèle répète ce qu'on lui donne : le nettoyage devait aller jusque-là.
+
+Corrigé :
+
+- base de connaissance réécrite, alignée sur ce qui est publié — aucun nom de client non public, aucune source
+- ligne explicite dans la base : « Le nom du client et les sources collectées sont confidentiels et ne doivent jamais être donnés »
+- règle ajoutée au prompt système : ne jamais nommer un client ou une source absents de la base ; si le visiteur insiste, répondre que c'est couvert par la confidentialité
+
+---
+
+## 10. Reste à faire
 
 1. Relancer le build et vérifier le rendu
 2. Historique Upwork détaillé
