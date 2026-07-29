@@ -28,7 +28,7 @@ export const fr: Dict = {
   metrics: [
     { value: "64 602", label: "fiches nettoyées par IA pour 5,51 $" },
     { value: "253 000", label: "textes alternatifs générés" },
-    { value: "4 jours", label: "du brief à un pipeline B2B en production" },
+    { value: "4 jours", label: "du brief à un pipeline commercial en production" },
     { value: "270", label: "sites industriels enrichis, au site près" },
   ],
 
@@ -155,7 +155,7 @@ export const fr: Dict = {
     kicker: "À propos",
     title: "Une seule personne. C'est le point fort, pas la limite.",
     body: [
-      "Je suis Oussama Abassi, ingénieur freelance basé à Paris, et je travaille avec des équipes B2B partout en Europe. La plupart de mes projets commencent pareil : un fondateur me montre un processus qui lui mange sa semaine, et je le transforme en système qui tourne tout seul.",
+      "Je suis Oussama Abassi, ingénieur freelance basé à Paris, et je travaille partout en Europe : PME industrielles, plateformes grand public, indépendants, startups. La taille et le secteur changent, le point de départ est toujours le même — quelqu'un me montre un processus qui lui mange sa semaine, et je le transforme en système qui tourne tout seul.",
       "Travailler avec moi, c'est un interlocuteur unique, aucune couche de gestion de projet, et la personne qui conçoit l'architecture est celle qui écrit le code et celle qui répond à vos messages. Sur un projet de quatre jours comme sur un projet de trois mois.",
       "Ce qui m'intéresse, ce sont les systèmes qui ne cassent pas dès que j'arrête de les regarder.",
     ],
@@ -169,7 +169,7 @@ export const fr: Dict = {
     items: [
       {
         name: "Maxime",
-        role: "Groupe industriel · Centre de pilotage & prospection B2B",
+        role: "Groupe industriel · Centre de pilotage & prospection commerciale",
         platform: "Upwork",
         url: "https://www.upwork.com/freelancers/~01e9d7e582881baac8",
         text: "Osama a su nous guider, nous conseiller et répondre à nos besoins avec une grande efficacité. Merci encore !",
@@ -204,6 +204,39 @@ export const fr: Dict = {
       },
     ],
     all: "Voir tous les avis Upwork",
+  },
+
+  faq: {
+    kicker: "Questions fréquentes",
+    title: "Les questions qu'on me pose avant de signer.",
+    sub: "Les réponses honnêtes, y compris quand elles ne m'arrangent pas.",
+    items: [
+      {
+        q: "Vous travaillez vraiment seul ?",
+        a: "Oui. Un seul interlocuteur, pas de couche de gestion de projet, et la personne qui conçoit l'architecture est celle qui écrit le code et celle qui répond à vos messages. Sur les très gros projets je peux m'appuyer sur des partenaires de confiance, mais vous gardez un seul point de contact : moi.",
+      },
+      {
+        q: "Combien de temps prend un projet ?",
+        a: "Ça dépend entièrement du périmètre, et je refuse de donner un chiffre avant de l'avoir compris. Pour donner un ordre de grandeur : un pipeline commercial autonome a été livré en 4 jours, un projet de données à grande échelle a couru sur deux mois. Après notre premier échange, vous avez une estimation argumentée — pas un chiffre lancé au hasard.",
+      },
+      {
+        q: "Comment se passe la facturation ?",
+        a: "Au forfait sur périmètre défini, ou en régie sur les missions longues. Un acompte est demandé au démarrage. Le budget se discute une fois le besoin cadré : je préfère un devis juste après avoir compris le problème plutôt qu'une grille tarifaire qui ne correspond à personne.",
+      },
+      {
+        q: "Que se passe-t-il si le système tombe après la livraison ?",
+        a: "Vous recevez la documentation, le runbook d'exploitation et l'accès complet au code — vous êtes autonome, sans dépendance cachée à moi. Un contrat de maintenance est possible mais optionnel. Certains clients n'en ont jamais eu besoin, et c'est exactement le but que je vise en construisant.",
+      },
+      {
+        q: "Mes données sont-elles en sécurité ?",
+        a: "NDA signé sur demande, avant tout échange de détail. Les clés d'API restent côté serveur, jamais dans le navigateur. Sur un projet récent, l'informaticien du client exigeait un accès bancaire strictement en lecture : le périmètre a été tenu à la lettre, aucune route d'écriture n'existe dans le code.",
+      },
+      {
+        q: "Vous reprenez un projet existant ou seulement du neuf ?",
+        a: "Les deux. Une bonne partie de mes missions consiste à reprendre une infrastructure déjà en place, à en corriger les angles morts et à la rendre exploitable. Reprendre du code existant demande souvent plus de rigueur que de repartir de zéro.",
+      },
+    ],
+    cta: "Une autre question ? Écrivez-moi.",
   },
 
   contact: {

@@ -157,7 +157,7 @@ export const casesEn: CaseStudy[] = [
     sector: "Industry · LED displays",
     duration: "4 days · May 2026",
     title: "A sales pipeline with nobody standing in it.",
-    kicker: "Autonomous B2B outbound",
+    kicker: "Autonomous sales outbound",
     problem:
       "The sales team spent dozens of hours a week on LinkedIn: finding prospects by hand, qualifying them, copy-pasting into the CRM, writing every message one at a time. Volume was capped at what one person can process in a day, and personalisation quality dropped as volume rose — exactly the wrong way round.",
     architecture: [
@@ -316,7 +316,7 @@ export const casesEn: CaseStudy[] = [
     sector: "Industry · Belgium",
     duration: "Data engagement",
     title: "270 industrial sites enriched, site by site.",
-    kicker: "B2B enrichment",
+    kicker: "Data enrichment",
     problem:
       "Standard company databases return the registered head office. For industrial outbound that's useless: what matters is the production site, not the admin office — you don't sell heavy equipment to a legal department.",
     architecture: [
@@ -363,7 +363,7 @@ export const casesEn: CaseStudy[] = [
     sector: "AI agent · lead generation",
     duration: "Product",
     title: "An agent that researches, qualifies and writes on its own.",
-    kicker: "Autonomous B2B agent",
+    kicker: "Autonomous outbound agent",
     problem:
       "Finding prospects and writing the outreach are two distinct tasks, both time-consuming, and rarely done well at the same time by the same person.",
     architecture: [

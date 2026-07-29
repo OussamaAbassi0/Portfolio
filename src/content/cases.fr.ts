@@ -169,7 +169,7 @@ export const casesFr: CaseStudy[] = [
     sector: "Industrie · écrans LED",
     duration: "4 jours · mai 2026",
     title: "Un pipeline commercial qui tourne sans personne dedans.",
-    kicker: "Prospection B2B autonome",
+    kicker: "Prospection commerciale autonome",
     problem:
       "L'équipe commerciale passait plusieurs dizaines d'heures par semaine sur LinkedIn : identifier les prospects à la main, les qualifier, copier-coller dans le CRM, rédiger chaque message un par un. Le volume plafonnait à ce qu'une personne traite dans une journée, et la qualité de la personnalisation baissait à mesure que le volume montait — exactement l'inverse de ce qu'il faut.",
     architecture: [
@@ -336,7 +336,7 @@ export const casesFr: CaseStudy[] = [
     sector: "Industrie · Belgique",
     duration: "Mission data",
     title: "270 sites industriels enrichis, au site près.",
-    kicker: "Enrichissement B2B",
+    kicker: "Enrichissement de données",
     problem:
       "Les bases d'entreprises classiques renvoient l'adresse du siège social. Pour une prospection industrielle, c'est inutilisable : ce qui compte est le site de production, pas le bureau administratif — on ne vend pas un équipement lourd à un service juridique.",
     architecture: [
@@ -383,7 +383,7 @@ export const casesFr: CaseStudy[] = [
     sector: "Agent IA · génération de leads",
     duration: "Produit",
     title: "Un agent qui cherche, qualifie et rédige tout seul.",
-    kicker: "Agent autonome B2B",
+    kicker: "Agent autonome de prospection",
     problem:
       "La recherche de prospects et la rédaction des approches sont deux tâches distinctes, toutes deux chronophages, et rarement bien faites en même temps par la même personne.",
     architecture: [

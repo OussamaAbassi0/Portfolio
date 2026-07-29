@@ -28,7 +28,7 @@ export const en: Dict = {
   metrics: [
     { value: "64,602", label: "records cleaned by AI for $5.51" },
     { value: "253,000", label: "alt texts generated" },
-    { value: "4 days", label: "from brief to a live B2B pipeline" },
+    { value: "4 days", label: "from brief to a live sales pipeline" },
     { value: "270", label: "industrial sites enriched, site by site" },
   ],
 
@@ -155,7 +155,7 @@ export const en: Dict = {
     kicker: "About",
     title: "One person. That's the strength, not the limit.",
     body: [
-      "I'm Oussama Abassi, a freelance engineer based in Paris, working with B2B teams across Europe. Most projects start the same way: a founder shows me a process eating their week, and I turn it into a system that runs on its own.",
+      "I'm Oussama Abassi, a freelance engineer based in Paris, working across Europe: industrial SMEs, consumer platforms, independents, startups. The size and the sector change, the starting point never does — someone shows me a process eating their week, and I turn it into a system that runs on its own.",
       "Working with me means one point of contact, no project-management layer, and the person designing the architecture is the person writing the code and answering your messages. On a four-day project as much as a three-month one.",
       "What interests me are systems that don't break the moment I stop watching them.",
     ],
@@ -169,7 +169,7 @@ export const en: Dict = {
     items: [
       {
         name: "Maxime",
-        role: "Industrial group · Control center & B2B outbound",
+        role: "Industrial group · Control center & sales outbound",
         platform: "Upwork",
         url: "https://www.upwork.com/freelancers/~01e9d7e582881baac8",
         text: "Osama guided us, advised us and met our needs with great efficiency. Thank you again!",
@@ -204,6 +204,39 @@ export const en: Dict = {
       },
     ],
     all: "See all Upwork reviews",
+  },
+
+  faq: {
+    kicker: "Frequently asked",
+    title: "The questions people ask before signing.",
+    sub: "Honest answers, including the ones that don't flatter me.",
+    items: [
+      {
+        q: "Do you really work alone?",
+        a: "Yes. One point of contact, no project-management layer, and the person designing the architecture is the person writing the code and answering your messages. On very large projects I can bring in trusted partners, but you keep a single point of contact: me.",
+      },
+      {
+        q: "How long does a project take?",
+        a: "It depends entirely on scope, and I won't quote a number before I understand it. For a sense of scale: an autonomous sales pipeline shipped in 4 days, a large-scale data project ran across two months. After our first conversation you get a reasoned estimate — not a figure pulled out of the air.",
+      },
+      {
+        q: "How does billing work?",
+        a: "Fixed price on a defined scope, or time-based on longer engagements. A deposit is required to start. Budget is discussed once the need is framed: I'd rather quote fairly after understanding the problem than publish a rate card that fits nobody.",
+      },
+      {
+        q: "What happens if the system breaks after delivery?",
+        a: "You get the documentation, the operations runbook and full access to the code — you're independent, with no hidden dependency on me. A maintenance contract is available but optional. Some clients have never needed one, and that's exactly what I aim for when building.",
+      },
+      {
+        q: "Is my data safe?",
+        a: "NDA signed on request, before any detail is exchanged. API keys stay server-side, never in the browser. On a recent project the client's IT lead required strictly read-only banking access: the scope was honoured to the letter, no write route exists in the codebase.",
+      },
+      {
+        q: "Do you take over existing projects or only new builds?",
+        a: "Both. A good share of my work is picking up infrastructure already in place, fixing its blind spots and making it operable. Taking over existing code often demands more rigour than starting from scratch.",
+      },
+    ],
+    cta: "Another question? Write to me.",
   },
 
   contact: {

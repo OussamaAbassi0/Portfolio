@@ -97,6 +97,13 @@ export interface Dict {
   stack: { kicker: string; title: string; sub: string; groups: StackGroup[] };
   about: { kicker: string; title: string; body: string[]; cta: string };
   reviews: { kicker: string; title: string; sub: string; items: Review[]; all: string };
+  faq: {
+    kicker: string;
+    title: string;
+    sub: string;
+    items: { q: string; a: string }[];
+    cta: string;
+  };
   contact: {
     kicker: string;
     title: string;

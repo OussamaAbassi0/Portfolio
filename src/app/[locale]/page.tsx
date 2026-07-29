@@ -9,6 +9,7 @@ import Process from "@/components/Process";
 import StackSection from "@/components/StackSection";
 import About from "@/components/About";
 import Reviews from "@/components/Reviews";
+import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -55,6 +56,15 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           reviewBody: r.text,
         })),
       },
+      {
+        "@type": "FAQPage",
+        "@id": `${SITE}/${locale}#faq`,
+        mainEntity: d.faq.items.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
     ],
   };
 
@@ -74,6 +84,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <StackSection d={d} />
         <About d={d} />
         <Reviews d={d} />
+        <Faq d={d} />
         <Contact d={d} locale={locale} />
       </main>
       <Footer d={d} locale={locale} />

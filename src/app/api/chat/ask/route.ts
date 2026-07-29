@@ -9,29 +9,42 @@ export const maxDuration = 30;
 /** Plafond dur : au-delà, on renvoie au parcours scripté. Coût borné par visiteur. */
 const MAX_LLM_CALLS = 5;
 
+/**
+ * Base de connaissance de l'assistant.
+ *
+ * ATTENTION — elle ne doit contenir QUE ce qui est déjà public sur le site.
+ * Aucune source scrapée, aucun nom de client non publié. Un modèle répète ce
+ * qu'on lui donne : ce qui n'est pas ici ne peut pas fuiter.
+ */
 const KB = `
-Oussama Abassi est un ingénieur freelance basé en France (Union européenne). Il travaille seul.
-Il conçoit et construit : pipelines de données, automatisation IA (n8n, agents), dashboards et control centers,
-développement web full-stack (Next.js, TypeScript), applications mobile et desktop, chatbots et assistants IA,
-e-commerce, design et identité visuelle.
+Oussama Abassi est un ingénieur freelance basé à Paris (Union européenne). Il travaille seul.
+Il travaille avec tous types de clients : PME industrielles, plateformes grand public, indépendants,
+startups. Aucun secteur n'est exclu.
 
-Références vérifiables :
-- LVI Control Center (LED Visual Innovation) : pipeline commercial B2B autonome livré en 4 jours.
-  Apify scrape LinkedIn, GPT-4o qualifie et rédige les icebreakers, Lemlist déclenche les campagnes,
-  Supabase centralise avec une synchronisation toutes les 30 secondes.
-- AfricArt : agrégation de plus de 50 000 œuvres depuis Drouot, Interencheres, Invaluable et LiveAuctioneers.
-  64 602 fiches nettoyées par GPT-4o-mini pour 5,51 $ au total. 253 000 textes alternatifs générés.
-  Infrastructure AWS EC2 + RDS, checkpoints, monitoring, synchronisation WordPress via API REST.
-- Bastide Confort Médical : automatisation n8n d'envoi de SMS d'anniversaire. Nettoyage CSV, normalisation E.164,
-  dédoublonnage, cron quotidien à 8 h, journalisation Google Sheets en temps réel. Avis 5,0 sur Upwork et Malt.
-- Moon Mobility : moteur de tarification VTC en Python (paliers kilométriques, surge, forfaits aéroport,
-  attente et annulation). Recommandation Malt 5,0.
-- B&C Enterprise : enrichissement de 270 sites industriels en Belgique, granularité au site et non au siège social.
-- Produits : FlowAudit AI, LeadScout AI, TalentScout AI, DarkosClaw.
+Ce qu'il conçoit et construit : pipelines de données, automatisation IA (n8n, agents), dashboards et
+centres de pilotage, développement web full-stack (Next.js, TypeScript), applications mobile et desktop,
+chatbots et assistants IA, e-commerce, design et identité visuelle.
 
-Profils publics : Upwork (Top Rated, 100% Job Success), Malt, LinkedIn.
+Références publiées sur le site :
+- Centre de pilotage exécutif pour un groupe industriel français (4,5 M€ de CA) : consolidation du CRM,
+  des comptes bancaires en lecture seule et de la facturation dans une interface unique, plus deux
+  assistants IA métier. 6 modules, 8 tables PostgreSQL avec Row Level Security, audit de contraste
+  sur 233 éléments, zéro dépendance npm ajoutée sur les six dernières fonctionnalités.
+- Pipeline commercial autonome livré en 4 jours pour le même groupe : extraction de prospects,
+  qualification et rédaction par IA, déclenchement des campagnes, dashboard synchronisé toutes les 30 s.
+- Pipeline data pour une place de marché d'enchères d'art : plus de 50 000 œuvres agrégées.
+  64 602 fiches nettoyées par IA pour 5,51 $ au total grâce à un marqueur d'idempotence.
+  253 000 textes alternatifs générés, 11 301 biographies réécrites en cinq langues.
+  Le nom du client et les sources collectées sont confidentiels et ne doivent jamais être donnés.
+- Automatisation n8n d'envoi de SMS pour un acteur du matériel médical : nettoyage CSV, normalisation
+  au format E.164, dédoublonnage, cron quotidien à 8 h, journalisation temps réel. Avis 5,0.
+- Moteur de tarification pour une flotte VTC, en Python. Recommandation 5,0 de la cliente.
+- Enrichissement de 270 sites industriels en Belgique, granularité au site et non au siège social.
+- Produits personnels : FlowAudit AI, LeadScout AI, TalentScout AI, DarkosClaw.
+
+Profils publics : Upwork (Top Rated, 100% Job Success, 5,0), Malt (5,0), LinkedIn.
 Process en cinq étapes : signal/brief, architecture, build, livraison, maintenance optionnelle.
-Réponse aux demandes sous 24 h. NDA sur demande.
+Réponse aux demandes sous 24 h. NDA sur demande. Le code livré appartient au client.
 `;
 
 const bodySchema = z.object({
@@ -101,6 +114,8 @@ Règles absolues :
 - Ne jamais annoncer de prix, de tarif, de TJM ni d'estimation chiffrée. Si on te demande un prix, réponds que le budget se discute selon le périmètre et invite à décrire le projet.
 - Ne jamais promettre de délai de livraison précis pour un projet. Tu peux dire qu'Oussama répond sous 24 h.
 - Ne jamais inventer de client, de chiffre ou de référence absents de la base ci-dessus.
+- Ne jamais nommer un client, une entreprise cliente ou une source de données qui ne figure pas explicitement dans la base. Si on insiste, répondre que ces informations sont couvertes par la confidentialité.
+- Oussama travaille avec tous les types de clients, entreprises comme particuliers. Ne jamais le présenter comme réservé au B2B.
 - Si la question sort du sujet, ramène poliment vers le projet du visiteur.
 - Termine toujours en invitant à laisser nom et email pour qu'Oussama réponde personnellement.`;
 

@@ -1,6 +1,15 @@
 import type { Dict } from "@/content";
+import { CONTACT } from "@/content";
 import Aurora from "./Aurora";
 import HeroVideo from "./HeroVideo";
+import BrandIcon from "./BrandIcon";
+
+const PROFILES = [
+  { name: "Upwork", href: CONTACT.upwork, label: "Profil Upwork — Top Rated, 100% Job Success" },
+  { name: "Malt", href: CONTACT.malt, label: "Profil Malt — 5,0 sur 2 évaluations" },
+  { name: "LinkedIn", href: CONTACT.linkedin, label: "Profil LinkedIn" },
+  { name: "WhatsApp", href: CONTACT.whatsapp, label: `WhatsApp — ${CONTACT.whatsappLabel}` },
+];
 
 export default function Hero({ d }: { d: Dict }) {
   const [l1, l2, l3] = d.hero.title;
@@ -45,18 +54,38 @@ export default function Hero({ d }: { d: Dict }) {
             </a>
           </div>
 
-          <div className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/8 pt-5">
-            <span className="flex items-center gap-1.5 font-mono text-sm text-magenta">
-              <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden>
-                <path d="M8 1l2.06 4.44L15 6.1l-3.6 3.36.9 4.94L8 12.1l-4.3 2.3.9-4.94L1 6.1l4.94-.66L8 1z" />
-              </svg>
-              5.0
-            </span>
-            {d.hero.proof.map((p) => (
-              <span key={p} className="label">
-                {p}
+          <div className="mt-9 border-t border-white/8 pt-5">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+              <span className="flex items-center gap-1.5 font-mono text-sm text-magenta">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" aria-hidden>
+                  <path d="M8 1l2.06 4.44L15 6.1l-3.6 3.36.9 4.94L8 12.1l-4.3 2.3.9-4.94L1 6.1l4.94-.66L8 1z" />
+                </svg>
+                5.0
               </span>
-            ))}
+              {d.hero.proof.map((p) => (
+                <span key={p} className="label">
+                  {p}
+                </span>
+              ))}
+            </div>
+
+            {/* Profils publics : la preuve est vérifiable en un clic */}
+            <ul className="mt-4 flex flex-wrap items-center gap-2">
+              {PROFILES.map((p) => (
+                <li key={p.name}>
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={p.label}
+                    title={p.label}
+                    className="glass flex size-10 items-center justify-center rounded-full text-dim transition-colors duration-200 hover:border-white/25 hover:text-bright"
+                  >
+                    <BrandIcon name={p.name} className="size-[17px]" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

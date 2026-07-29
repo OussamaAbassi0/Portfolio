@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Dict, Locale } from "@/content";
 import { CONTACT } from "@/content";
+import BrandIcon from "./BrandIcon";
 
 export default function Footer({ d, locale }: { d: Dict; locale: Locale }) {
   const legalPath = locale === "fr" ? "mentions-legales" : "legal";
@@ -14,6 +15,28 @@ export default function Footer({ d, locale }: { d: Dict; locale: Locale }) {
             Oussama Abassi<span className="text-magenta">.</span>
           </p>
           <p className="mt-4 max-w-[42ch] text-sm leading-relaxed text-faint">{d.footer.tagline}</p>
+
+          <ul className="mt-6 flex flex-wrap items-center gap-2">
+            {[
+              { name: "Upwork", href: CONTACT.upwork },
+              { name: "Malt", href: CONTACT.malt },
+              { name: "LinkedIn", href: CONTACT.linkedin },
+              { name: "WhatsApp", href: CONTACT.whatsapp },
+            ].map((p) => (
+              <li key={p.name}>
+                <a
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={p.name}
+                  title={p.name}
+                  className="glass flex size-10 items-center justify-center rounded-full text-dim transition-colors duration-200 hover:border-white/25 hover:text-bright"
+                >
+                  <BrandIcon name={p.name} className="size-[17px]" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <nav aria-label={d.footer.nav}>
