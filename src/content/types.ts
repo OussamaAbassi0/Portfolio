@@ -15,10 +15,10 @@ export type ServiceKey =
 export interface Service {
   key: ServiceKey;
   title: string;
+  /** ce que c'est */
   line: string;
-  caseSlug: string;
-  /** taille dans la grille bento */
-  span: "hero" | "wide" | "tall" | "unit";
+  /** comment c'est construit, concrètement — remplace le lien vers une étude de cas */
+  how: string;
 }
 
 export interface ArchNode {
