@@ -69,6 +69,7 @@ export default function ContactForm({ d, locale }: { d: Dict; locale: Locale }) 
     if (k === "tooShort")
       return locale === "fr" ? "Un peu plus de détail, s'il vous plaît." : "A little more detail, please.";
     if (k === "sendFailed") return d.contact.error;
+    if (k === "emailFailed") return d.contact.errorEmail;
     return locale === "fr" ? "Ce champ est requis." : "This field is required.";
   };
 
@@ -262,8 +263,13 @@ export default function ContactForm({ d, locale }: { d: Dict; locale: Locale }) 
       </div>
 
       {state.errors?.form && (
-        <p role="alert" className="mt-5 text-sm text-[#FF6B7A]">
-          {d.contact.error}
+        <p
+          role="alert"
+          className={`mt-5 text-sm ${
+            state.errors.form === "emailFailed" ? "text-dim" : "text-[#FF6B7A]"
+          }`}
+        >
+          {msg(state.errors.form)}
         </p>
       )}
 

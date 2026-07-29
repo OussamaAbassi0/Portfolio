@@ -57,5 +57,13 @@ export async function submitContact(
     userAgent: h.get("user-agent"),
   });
 
-  return result.ok ? { status: "success" } : { status: "error", errors: { form: "sendFailed" } };
+  if (result.ok) return { status: "success" };
+
+  // On distingue les deux échecs. Promettre « votre message a été enregistré »
+  // alors que rien n'a été écrit en base serait un mensonge au visiteur —
+  // et il attendrait une réponse qui ne viendrait jamais.
+  return {
+    status: "error",
+    errors: { form: result.stored ? "emailFailed" : "sendFailed" },
+  };
 }

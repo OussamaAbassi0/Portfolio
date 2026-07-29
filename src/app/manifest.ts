@@ -12,7 +12,7 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#0A0510",
     lang: "fr",
     icons: [
-      { src: "/photo-oussama.png", sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: "/logo-oa.png", sizes: "512x512", type: "image/png", purpose: "any" },
     ],
   };
 }

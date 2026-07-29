@@ -277,8 +277,12 @@ export const fr: Dict = {
     success: "Message reçu.",
     successBody:
       "Vous recevez un accusé de réception par email. Je vous réponds personnellement sous 24 h.",
+    // Deux échecs différents, deux messages différents : on ne promet jamais
+    // au visiteur que son message est arrivé quand ce n'est pas le cas.
     error:
-      "L'envoi a échoué. Votre message a tout de même été enregistré — vous pouvez aussi m'écrire directement.",
+      "L'envoi n'a pas fonctionné. Écrivez-moi directement à oussama.abassi.work@gmail.com ou sur WhatsApp, je réponds tout de suite.",
+    errorEmail:
+      "Votre message est bien enregistré, je le verrai. L'accusé de réception automatique n'est pas parti — si c'est urgent, écrivez-moi sur WhatsApp.",
     guarantees: ["Réponse sous 24 h", "NDA sur demande", "Basé en UE"],
     optional: "facultatif",
     required: "requis",

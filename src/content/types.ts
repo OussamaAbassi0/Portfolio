@@ -122,7 +122,10 @@ export interface Dict {
     sending: string;
     success: string;
     successBody: string;
+    /** rien n'a pu être enregistré ni envoyé */
     error: string;
+    /** le lead est en base, seul l'email a échoué */
+    errorEmail: string;
     guarantees: string[];
     optional: string;
     required: string;

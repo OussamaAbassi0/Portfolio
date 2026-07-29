@@ -273,7 +273,9 @@ export const en: Dict = {
     successBody:
       "You'll get a confirmation email. I'll reply personally within 24 hours.",
     error:
-      "Sending failed. Your message was still saved — you can also email me directly.",
+      "That didn't go through. Email me directly at oussama.abassi.work@gmail.com or message me on WhatsApp — I'll reply straight away.",
+    errorEmail:
+      "Your message is saved, I'll see it. The automatic confirmation didn't go out — if it's urgent, reach me on WhatsApp.",
     guarantees: ["Reply within 24h", "NDA on request", "EU-based"],
     optional: "optional",
     required: "required",
