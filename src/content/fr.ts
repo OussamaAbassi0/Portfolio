@@ -17,7 +17,7 @@ export const fr: Dict = {
 
   hero: {
     badge: "Disponible pour de nouveaux projets",
-    title: ["Je conçois et je", "construis les", "qui font tourner"],
+    title: ["Je conçois et je construis", "les", "qui font tourner votre entreprise."],
     accent: "systèmes",
     sub: "Pipelines de données, automatisation IA, dashboards, sites et applications — de bout en bout, par une seule personne qui livre.",
     ctaPrimary: "Démarrer un projet",
@@ -41,7 +41,7 @@ export const fr: Dict = {
         key: "data",
         title: "Data & pipelines",
         line: "Scraping, nettoyage, déduplication, enrichissement, synchronisation. De la source brute à la donnée exploitable.",
-        caseSlug: "africart",
+        caseSlug: "marketplace-art",
         span: "hero",
       },
       {
@@ -55,7 +55,7 @@ export const fr: Dict = {
         key: "dashboards",
         title: "Dashboards & control centers",
         line: "Une interface pour piloter un système, pas pour l'admirer.",
-        caseSlug: "lvi-control-center",
+        caseSlug: "executive-control-center",
         span: "unit",
       },
       {
@@ -83,7 +83,7 @@ export const fr: Dict = {
         key: "ecommerce",
         title: "E-commerce",
         line: "Catalogues, paiement, synchronisation stock et back-office.",
-        caseSlug: "africart",
+        caseSlug: "marketplace-art",
         span: "unit",
       },
       {
@@ -155,7 +155,7 @@ export const fr: Dict = {
     kicker: "À propos",
     title: "Une seule personne. C'est le point fort, pas la limite.",
     body: [
-      "Je suis Oussama Abassi, ingénieur freelance basé en France, et je travaille avec des équipes B2B partout en Europe. La plupart de mes projets commencent pareil : un fondateur me montre un processus qui lui mange sa semaine, et je le transforme en système qui tourne tout seul.",
+      "Je suis Oussama Abassi, ingénieur freelance basé à Paris, et je travaille avec des équipes B2B partout en Europe. La plupart de mes projets commencent pareil : un fondateur me montre un processus qui lui mange sa semaine, et je le transforme en système qui tourne tout seul.",
       "Travailler avec moi, c'est un interlocuteur unique, aucune couche de gestion de projet, et la personne qui conçoit l'architecture est celle qui écrit le code et celle qui répond à vos messages. Sur un projet de quatre jours comme sur un projet de trois mois.",
       "Ce qui m'intéresse, ce sont les systèmes qui ne cassent pas dès que j'arrête de les regarder.",
     ],
@@ -167,6 +167,20 @@ export const fr: Dict = {
     title: "Publics, vérifiables, tous en 5,0.",
     sub: "Chaque avis renvoie vers sa source publique sur Upwork ou Malt.",
     items: [
+      {
+        name: "Maxime",
+        role: "Groupe industriel · Centre de pilotage & prospection B2B",
+        platform: "Upwork",
+        url: "https://www.upwork.com/freelancers/~01e9d7e582881baac8",
+        text: "Osama a su nous guider, nous conseiller et répondre à nos besoins avec une grande efficacité. Merci encore !",
+      },
+      {
+        name: "Yassine Alomari",
+        role: "Directeur général · Junto · Recommandation du 14/05/2026",
+        platform: "Malt",
+        url: "https://www.malt.fr/profile/oussamaabassi1",
+        text: "J'ai fait appel à Oussama pour automatiser une partie de nos process internes. Il a livré rapidement, le résultat était propre et ça tourne sans problème depuis. Pas besoin de lui expliquer deux fois ce qu'on voulait, il comprend vite et propose des solutions concrètes. Je recommande.",
+      },
       {
         name: "Matys Nsir",
         role: "Bastide Confort Médical · Automatisation n8n",

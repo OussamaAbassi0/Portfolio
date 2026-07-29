@@ -27,6 +27,18 @@ export interface ArchNode {
   sub: string;
 }
 
+export interface CaseImage {
+  src: string;
+  alt: string;
+}
+
+export interface CaseSection {
+  title: string;
+  body: string;
+  /** points clés, affichés en liste sous le paragraphe */
+  bullets?: string[];
+}
+
 export interface CaseStudy {
   slug: string;
   client: string;
@@ -41,6 +53,10 @@ export interface CaseStudy {
   results: { value: string; label: string }[];
   quote?: { text: string; author: string; role: string; source: string; url: string };
   featured: boolean;
+  /** captures d'écran du projet, anonymisées */
+  images?: CaseImage[];
+  /** sections détaillées, affichées uniquement sur la page dédiée */
+  detail?: CaseSection[];
 }
 
 export interface Review {

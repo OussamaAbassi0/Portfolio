@@ -1,5 +1,6 @@
 import type { Dict } from "@/content";
 import SectionHead from "./SectionHead";
+import BrandIcon from "./BrandIcon";
 
 /**
  * Défilement continu, sens alterné. Mis en pause au survol et au focus clavier —
@@ -19,9 +20,10 @@ function Row({ items, reverse, speed }: { items: string[]; reverse: boolean; spe
         {doubled.map((item, i) => (
           <li
             key={`${item}-${i}`}
-            className="glass shrink-0 rounded-full px-5 py-3 font-mono text-sm text-dim"
+            className="glass flex shrink-0 items-center gap-2.5 rounded-full px-5 py-3 font-mono text-sm text-dim transition-colors duration-300 hover:text-bright"
             aria-hidden={i >= items.length}
           >
+            <BrandIcon name={item} className="size-4" />
             {item}
           </li>
         ))}

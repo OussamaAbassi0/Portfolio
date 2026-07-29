@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
+import path from "node:path";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // Un package-lock.json traîne dans le dossier parent : sans ça, Turbopack
+  // remonte trop haut pour déduire la racine du projet.
+  turbopack: { root: path.resolve(process.cwd()) },
   images: {
     formats: ["image/avif", "image/webp"],
   },

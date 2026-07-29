@@ -5,6 +5,8 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import Aurora from "./Aurora";
 import ArchDiagram from "./ArchDiagram";
+import CaseGallery from "./CaseGallery";
+import BrandIcon from "./BrandIcon";
 import { ArrowIcon, StarIcon } from "./Icons";
 
 export default function CaseStudyPage({ locale, slug }: { locale: string; slug: string }) {
@@ -64,14 +66,40 @@ export default function CaseStudyPage({ locale, slug }: { locale: string; slug: 
               <ArchDiagram nodes={c.architecture} note={c.archNote} />
             </section>
 
+            {c.images && c.images.length > 0 && (
+              <section className="reveal mt-16">
+                <p className="label mb-5">{l === "fr" ? "Le produit" : "The product"}</p>
+                <CaseGallery images={c.images} label={c.title} locale={l} />
+              </section>
+            )}
+
+            {c.detail?.map((s) => (
+              <section key={s.title} className="reveal mt-16">
+                <h2 className="font-display text-[clamp(1.4rem,2.6vw,2rem)] font-extrabold tracking-tight text-bright">
+                  {s.title}
+                </h2>
+                <p className="mt-4 max-w-[64ch] text-lg leading-relaxed text-dim">{s.body}</p>
+                {s.bullets && (
+                  <ul className="mt-6 space-y-3">
+                    {s.bullets.map((b) => (
+                      <li key={b} className="glass rounded-card p-5 text-[15px] leading-relaxed text-dim">
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            ))}
+
             <section className="reveal mt-16">
               <p className="label mb-5">Stack</p>
               <ul className="flex flex-wrap gap-2">
                 {c.stack.map((s) => (
                   <li
                     key={s}
-                    className="rounded-full border border-white/10 px-4 py-2 font-mono text-sm text-dim"
+                    className="flex items-center gap-2.5 rounded-full border border-white/10 px-4 py-2 font-mono text-sm text-dim"
                   >
+                    <BrandIcon name={s} className="size-4" />
                     {s}
                   </li>
                 ))}

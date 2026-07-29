@@ -41,7 +41,7 @@ export const en: Dict = {
         key: "data",
         title: "Data & pipelines",
         line: "Scraping, cleaning, deduplication, enrichment, syncing. From raw source to data you can actually use.",
-        caseSlug: "africart",
+        caseSlug: "marketplace-art",
         span: "hero",
       },
       {
@@ -55,7 +55,7 @@ export const en: Dict = {
         key: "dashboards",
         title: "Dashboards & control centers",
         line: "An interface built to operate a system, not to admire it.",
-        caseSlug: "lvi-control-center",
+        caseSlug: "executive-control-center",
         span: "unit",
       },
       {
@@ -83,7 +83,7 @@ export const en: Dict = {
         key: "ecommerce",
         title: "E-commerce",
         line: "Catalogues, payments, stock and back-office syncing.",
-        caseSlug: "africart",
+        caseSlug: "marketplace-art",
         span: "unit",
       },
       {
@@ -155,7 +155,7 @@ export const en: Dict = {
     kicker: "About",
     title: "One person. That's the strength, not the limit.",
     body: [
-      "I'm Oussama Abassi, a freelance engineer based in France, working with B2B teams across Europe. Most projects start the same way: a founder shows me a process eating their week, and I turn it into a system that runs on its own.",
+      "I'm Oussama Abassi, a freelance engineer based in Paris, working with B2B teams across Europe. Most projects start the same way: a founder shows me a process eating their week, and I turn it into a system that runs on its own.",
       "Working with me means one point of contact, no project-management layer, and the person designing the architecture is the person writing the code and answering your messages. On a four-day project as much as a three-month one.",
       "What interests me are systems that don't break the moment I stop watching them.",
     ],
@@ -167,6 +167,20 @@ export const en: Dict = {
     title: "Public, verifiable, all 5.0.",
     sub: "Every review links back to its public source on Upwork or Malt.",
     items: [
+      {
+        name: "Maxime",
+        role: "Industrial group · Control center & B2B outbound",
+        platform: "Upwork",
+        url: "https://www.upwork.com/freelancers/~01e9d7e582881baac8",
+        text: "Osama guided us, advised us and met our needs with great efficiency. Thank you again!",
+      },
+      {
+        name: "Yassine Alomari",
+        role: "Managing Director · Junto · Recommendation of 14/05/2026",
+        platform: "Malt",
+        url: "https://www.malt.fr/profile/oussamaabassi1",
+        text: "I brought Oussama in to automate part of our internal processes. He delivered quickly, the result was clean and it has been running without a hitch since. No need to explain what we wanted twice — he gets it fast and proposes concrete solutions. I recommend him.",
+      },
       {
         name: "Matys Nsir",
         role: "Bastide Confort Médical · n8n automation",

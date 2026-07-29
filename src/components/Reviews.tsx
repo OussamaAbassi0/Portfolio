@@ -1,6 +1,7 @@
 import type { Dict } from "@/content";
 import { CONTACT } from "@/content";
 import SectionHead from "./SectionHead";
+import BrandIcon from "./BrandIcon";
 import { ArrowIcon, StarIcon } from "./Icons";
 
 export default function Reviews({ d }: { d: Dict }) {
@@ -24,7 +25,10 @@ export default function Reviews({ d }: { d: Dict }) {
                     <StarIcon className="size-3.5" />
                     5.0
                   </span>
-                  <span className="label">{r.platform}</span>
+                  <span className="label flex items-center gap-2 !text-dim">
+                    <BrandIcon name={r.platform} className="size-3.5" />
+                    {r.platform}
+                  </span>
                 </div>
 
                 <blockquote className="mt-5 flex-1 text-[15px] leading-relaxed text-dim">

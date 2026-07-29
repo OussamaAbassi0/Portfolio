@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Instrument_Sans, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
-import { getDict, isLocale, LOCALES } from "@/content";
+import { getDict, isLocale, LOCALES, type Locale } from "@/content";
 import SmoothScroll from "@/components/SmoothScroll";
 import RevealFallback from "@/components/RevealFallback";
+import ChatBubble from "@/components/ChatBubble";
 import "../globals.css";
 
 const bricolage = Bricolage_Grotesque({
@@ -77,6 +78,7 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
+  const d = getDict(locale);
 
   return (
     <html
@@ -105,6 +107,7 @@ export default async function LocaleLayout({
         <SmoothScroll />
         <RevealFallback />
         {children}
+        <ChatBubble d={d} locale={locale as Locale} />
       </body>
     </html>
   );
