@@ -26,14 +26,53 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "WebSite",
+        "@id": `${SITE}/#website`,
+        url: SITE,
+        name: "Oussama Abassi",
+        inLanguage: locale === "fr" ? "fr-FR" : "en-US",
+        publisher: { "@id": `${SITE}/#person` },
+      },
+      {
         "@type": "Person",
         "@id": `${SITE}/#person`,
         name: "Oussama Abassi",
-        jobTitle: locale === "fr" ? "Ingénieur systèmes freelance" : "Freelance systems engineer",
+        jobTitle:
+          locale === "fr"
+            ? "Ingénieur freelance — automatisation IA et data"
+            : "Freelance engineer — AI automation and data",
+        description: d.meta.description,
+        image: `${SITE}/photo-oussama.png`,
         email: `mailto:${CONTACT.email}`,
+        telephone: "+33679634996",
         url: SITE,
         sameAs: [CONTACT.linkedin, CONTACT.upwork, CONTACT.malt],
-        address: { "@type": "PostalAddress", addressCountry: "FR" },
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Paris",
+          addressCountry: "FR",
+        },
+        // Ces compétences déclarées aident Google à comprendre sur quelles
+        // requêtes la page mérite d'être proposée.
+        knowsAbout: [
+          "n8n",
+          "Workflow automation",
+          "Web scraping",
+          "Data pipelines",
+          "Large language models",
+          "OpenAI GPT-4o",
+          "Next.js",
+          "TypeScript",
+          "PostgreSQL",
+          "Supabase",
+          "Python",
+          "Business intelligence dashboards",
+        ],
+        knowsLanguage: ["fr", "en", "ar"],
+        alumniOf: {
+          "@type": "EducationalOrganization",
+          name: "ESI Green & Social Business School",
+        },
       },
       {
         "@type": "ProfessionalService",
@@ -41,8 +80,23 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         name: "Oussama Abassi",
         description: d.meta.description,
         url: `${SITE}/${locale}`,
+        image: `${SITE}/og-image.png`,
         provider: { "@id": `${SITE}/#person` },
-        areaServed: "EU",
+        priceRange: "$$",
+        areaServed: [
+          { "@type": "Country", name: "France" },
+          { "@type": "Place", name: "Europe" },
+        ],
+        // Le catalogue de services : c'est ce qui permet à Google d'associer
+        // le site à des recherches précises du type « freelance n8n ».
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: locale === "fr" ? "Prestations" : "Services",
+          itemListElement: d.services.items.map((s) => ({
+            "@type": "Offer",
+            itemOffered: { "@type": "Service", name: s.title, description: s.line },
+          })),
+        },
         aggregateRating: {
           "@type": "AggregateRating",
           ratingValue: "5",

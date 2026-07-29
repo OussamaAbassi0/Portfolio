@@ -19,8 +19,49 @@ export default function CaseStudyPage({ locale, slug }: { locale: string; slug: 
   const workPath = l === "fr" ? "travaux" : "work";
   const others = getCases(l).filter((x) => x.slug !== slug).slice(0, 3);
 
+  const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://oussamaabassi.com";
+
+  /**
+   * Fil d'Ariane structuré : c'est ce qui fait apparaître
+   * « oussamaabassi.com › Travaux › Nom du projet » dans les résultats Google
+   * au lieu d'une URL brute. Plus lisible, donc plus cliqué.
+   */
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Oussama Abassi", item: `${site}/${l}` },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: d.cases.kicker,
+            item: `${site}/${l}#work`,
+          },
+          { "@type": "ListItem", position: 3, name: c.title },
+        ],
+      },
+      {
+        "@type": "Article",
+        headline: c.title,
+        description: c.problem.slice(0, 200),
+        inLanguage: l === "fr" ? "fr-FR" : "en-US",
+        author: { "@type": "Person", name: "Oussama Abassi", url: site },
+        publisher: { "@type": "Person", name: "Oussama Abassi", url: site },
+        mainEntityOfPage: `${site}/${l}/${workPath}/${slug}`,
+        ...(c.images?.[0] ? { image: `${site}${c.images[0].src}` } : {}),
+        about: c.stack,
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Nav d={d} locale={l} />
       <main id="main">
         <article>

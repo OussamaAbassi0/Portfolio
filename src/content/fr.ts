@@ -2,9 +2,15 @@ import type { Dict } from "./types";
 
 export const fr: Dict = {
   meta: {
-    title: "Oussama Abassi — Je conçois et je construis les systèmes qui font tourner votre entreprise",
+    // Le titre est ce que Google affiche en bleu dans ses résultats. Il doit
+    // contenir les mots que les gens tapent réellement — « freelance
+    // automatisation », « n8n », « scraping » — pas seulement un nom de marque
+    // que personne ne cherche encore. Moins de 60 caractères avant le nom,
+    // sinon Google tronque.
+    title:
+      "Freelance automatisation IA & data — n8n, scraping, dashboards | Oussama Abassi",
     description:
-      "Freelance basé en UE. Pipelines de données, automatisation IA, dashboards, sites et applications — conçus de bout en bout, par une seule personne qui livre.",
+      "Ingénieur freelance à Paris. J'automatise vos processus avec n8n et l'IA, je construis vos pipelines de données, dashboards, sites et applications. Top Rated Upwork, 5,0 sur Malt. Réponse sous 24 h.",
   },
 
   nav: {

@@ -30,6 +30,38 @@ const geistMono = Geist_Mono({
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://oussamaabassi.com";
 
+/**
+ * Mots-clés de positionnement. Google ne lit plus la balise keywords, mais
+ * cette liste sert de garde-fou éditorial : chacun de ces termes doit se
+ * retrouver naturellement dans le texte des pages, sinon on ne se positionnera
+ * pas dessus. C'est le contenu qui classe, pas la balise.
+ */
+const KEYWORDS_FR = [
+  "freelance automatisation",
+  "expert n8n",
+  "freelance IA",
+  "web scraping freelance",
+  "pipeline de données",
+  "développeur Next.js freelance",
+  "agent IA sur mesure",
+  "dashboard sur mesure",
+  "automatisation des processus",
+  "freelance data Paris",
+];
+
+const KEYWORDS_EN = [
+  "freelance automation engineer",
+  "n8n expert",
+  "freelance AI developer",
+  "web scraping freelance",
+  "data pipeline engineer",
+  "freelance Next.js developer",
+  "custom AI agent",
+  "custom dashboard",
+  "business process automation",
+  "freelance data engineer Paris",
+];
+
 export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
@@ -41,10 +73,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const d = getDict(locale);
+  const fr = locale === "fr";
+
   return {
     metadataBase: new URL(SITE),
     title: d.meta.title,
     description: d.meta.description,
+    keywords: fr ? KEYWORDS_FR : KEYWORDS_EN,
+    authors: [{ name: "Oussama Abassi", url: SITE }],
+    creator: "Oussama Abassi",
+    publisher: "Oussama Abassi",
+    applicationName: "Oussama Abassi",
+    category: fr ? "Technologie" : "Technology",
     alternates: {
       canonical: `/${locale}`,
       languages: { fr: "/fr", en: "/en", "x-default": "/fr" },
@@ -54,11 +94,40 @@ export async function generateMetadata({
       description: d.meta.description,
       url: `${SITE}/${locale}`,
       siteName: "Oussama Abassi",
-      locale: locale === "fr" ? "fr_FR" : "en_US",
+      locale: fr ? "fr_FR" : "en_US",
+      alternateLocale: fr ? "en_US" : "fr_FR",
       type: "website",
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: fr
+            ? "Oussama Abassi — freelance automatisation IA et data"
+            : "Oussama Abassi — freelance AI automation and data engineer",
+        },
+      ],
     },
-    twitter: { card: "summary_large_image", title: d.meta.title, description: d.meta.description },
-    robots: { index: true, follow: true },
+    twitter: {
+      card: "summary_large_image",
+      title: d.meta.title,
+      description: d.meta.description,
+      images: ["/og-image.png"],
+    },
+    // Les directives détaillées disent à Google d'afficher un extrait long et
+    // une grande image dans ses résultats, au lieu d'une vignette minuscule.
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    formatDetection: { telephone: false, address: false, email: false },
   };
 }
 

@@ -2,9 +2,10 @@ import type { Dict } from "./types";
 
 export const en: Dict = {
   meta: {
-    title: "Oussama Abassi — I design and build the systems your business runs on",
+    title:
+      "Freelance AI automation & data engineer — n8n, scraping, dashboards | Oussama Abassi",
     description:
-      "EU-based freelance engineer. Data pipelines, AI automation, dashboards, websites and apps — engineered end-to-end, by one person who ships.",
+      "Freelance engineer based in Paris. I automate your processes with n8n and AI, and build your data pipelines, dashboards, websites and apps. Top Rated on Upwork, 5.0 on Malt. Reply within 24h.",
   },
 
   nav: {
