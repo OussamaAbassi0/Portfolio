@@ -33,6 +33,17 @@ export const en: Dict = {
     { value: "270", label: "industrial sites enriched, site by site" },
   ],
 
+  clients: {
+    kicker: "They trusted me with their systems",
+    items: [
+      { name: "Bastide Médical", src: "/clients/bastide.png", h: 46 },
+      { name: "LED Visual Innovation", src: "/clients/lvi.png", h: 50 },
+      { name: "AfricartMarket", src: "/clients/africart.png", h: 20 },
+      { name: "Moon", src: "/clients/moon.png", h: 28 },
+      { name: "Digital Easy", src: "/clients/digitaleasy.png", h: 23 },
+    ],
+  },
+
   services: {
     kicker: "What I build",
     title: "Eight disciplines. One person to talk to.",

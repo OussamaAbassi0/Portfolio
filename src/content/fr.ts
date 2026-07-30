@@ -38,6 +38,17 @@ export const fr: Dict = {
     { value: "270", label: "sites industriels enrichis, au site près" },
   ],
 
+  clients: {
+    kicker: "Ils m'ont confié leurs systèmes",
+    items: [
+      { name: "Bastide Médical", src: "/clients/bastide.png", h: 46 },
+      { name: "LED Visual Innovation", src: "/clients/lvi.png", h: 50 },
+      { name: "AfricartMarket", src: "/clients/africart.png", h: 20 },
+      { name: "Moon", src: "/clients/moon.png", h: 28 },
+      { name: "Digital Easy", src: "/clients/digitaleasy.png", h: 23 },
+    ],
+  },
+
   services: {
     kicker: "Ce que je construis",
     title: "Huit domaines. Un seul interlocuteur.",

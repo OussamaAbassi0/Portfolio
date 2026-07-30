@@ -91,6 +91,8 @@ export interface Dict {
     proof: string[];
   };
   metrics: { value: string; label: string }[];
+  /** bandeau de logos clients — `h` est la hauteur d'affichage, calibrée à l'œil */
+  clients: { kicker: string; items: { name: string; src: string; h: number }[] };
   services: { kicker: string; title: string; sub: string; items: Service[] };
   cases: { kicker: string; title: string; sub: string; readMore: string; similar: string };
   process: { kicker: string; title: string; sub: string; steps: ProcessStep[] };

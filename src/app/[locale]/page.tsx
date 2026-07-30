@@ -3,6 +3,7 @@ import { getDict, getCases, isLocale, CONTACT } from "@/content";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Metrics from "@/components/Metrics";
+import Clients from "@/components/Clients";
 import Services from "@/components/Services";
 import Cases from "@/components/Cases";
 import Process from "@/components/Process";
@@ -132,6 +133,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       <main id="main">
         <Hero d={d} />
         <Metrics d={d} />
+        <Clients d={d} />
         <Services d={d} locale={locale} />
         <Cases d={d} locale={locale} cases={cases} />
         <Process d={d} />
