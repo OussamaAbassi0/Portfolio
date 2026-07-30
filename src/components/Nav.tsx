@@ -45,7 +45,29 @@ export default function Nav({ d, locale }: { d: Dict; locale: Locale }) {
   }, []);
 
   const other: Locale = locale === "fr" ? "en" : "fr";
-  const otherHref = pathname.replace(/^\/(fr|en)/, `/${other}`);
+
+  /**
+   * Le segment de route est traduit, pas seulement le préfixe de langue.
+   * Sans ça, depuis /fr/travaux/mon-projet le bouton EN menait vers
+   * /en/travaux/mon-projet — une URL qui n'existe pas, donc une 404 sur
+   * chaque page projet. Constaté dans les journaux de production.
+   */
+  const SEGMENTS: Record<string, string> = {
+    travaux: "work",
+    work: "travaux",
+    "mentions-legales": "legal",
+    legal: "mentions-legales",
+  };
+  const otherHref =
+    "/" +
+    [
+      other,
+      ...pathname
+        .split("/")
+        .filter(Boolean)
+        .slice(1)
+        .map((seg) => SEGMENTS[seg] ?? seg),
+    ].join("/");
 
   return (
     <>

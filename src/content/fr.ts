@@ -200,6 +200,13 @@ export const fr: Dict = {
         url: "https://www.malt.fr/profile/oussamaabassi1",
         text: "J'ai eu l'opportunité de travailler avec Oussama sur des projets d'automatisation et je le recommande vivement. Il maîtrise parfaitement n8n et a su transformer des processus manuels complexes en workflows fluides et efficaces. Oussama n'est pas seulement technique — il a aussi une véritable vision business pour faire gagner du temps. Un expert fiable et très réactif.",
       },
+      {
+        name: "Tristan",
+        role: "Client Upwork",
+        platform: "Upwork",
+        url: "https://www.upwork.com/freelancers/~01e9d7e582881baac8",
+        text: "Parfait !",
+      },
     ],
     all: "Voir tous les avis Upwork",
   },

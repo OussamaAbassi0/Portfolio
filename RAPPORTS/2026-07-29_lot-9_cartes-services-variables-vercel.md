@@ -58,15 +58,15 @@ En navigation privée, le résultat est immédiat et sans ambiguïté : c'est le
 | `SUPABASE_URL` | `https://boebkjuohvrgjeylluhx.supabase.co` |
 | `SUPABASE_SERVICE_ROLE_KEY` | ta clé `service_role` Supabase |
 | `RESEND_API_KEY` | ta clé Resend |
-| `RESEND_FROM` | `Oussama Abassi <onboarding@resend.dev>` |
+| `RESEND_FROM` | `Oussama Abassi <contact@oussamaabassi.com>` |
 | `CONTACT_TO_EMAIL` | `oussama.abassi.work@gmail.com` |
-| `IP_HASH_SALT` | une longue chaîne aléatoire, choisie une fois et jamais changée |
+| `IP_HASH_SALT` | `kjVEHfve3sLVS3iegs4-Wkxb39Ytin_z97RLsBb_7mc` |
 | `GROQ_API_KEY` | ta clé Groq — facultative |
 
 ### Points à connaître
 
-- **`RESEND_FROM`** : garde `onboarding@resend.dev` tant que le domaine n'est pas vérifié chez Resend. Dès qu'il l'est, remplace par `Oussama Abassi <contact@oussamaabassi.com>` — les emails partiront de ton domaine et arriveront beaucoup mieux.
-- **`IP_HASH_SALT`** : sert à hacher les adresses IP des visiteurs. L'IP n'est jamais stockée en clair, seule son empreinte l'est. Si tu changes cette valeur plus tard, les anciennes empreintes deviennent incomparables aux nouvelles — donc on la fixe une fois.
+- **`RESEND_FROM`** : le domaine `oussamaabassi.com` est **vérifié** chez Resend (constaté le 29/07/2026, région Irlande). Les emails peuvent donc partir de `contact@oussamaabassi.com` — pas besoin de créer cette boîte, elle sert uniquement d'expéditeur. Les réponses arrivent quand même sur ton Gmail, puisque `CONTACT_TO_EMAIL` est le destinataire.
+- **`IP_HASH_SALT`** : un mot de passe interne qui sert à brouiller les adresses IP des visiteurs. Le site a besoin de reconnaître une IP pour limiter le spam, mais il ne stocke jamais l'IP elle-même : il stocke `hash(IP + ce mot)`. Sans ce mot, l'empreinte est irréversible — même moi, avec un accès à la base, je ne peux pas remonter à l'adresse. C'est pour ça qu'il doit être long et aléatoire, et fixé une fois pour toutes : le changer rendrait les anciennes empreintes incomparables aux nouvelles.
 - **`GROQ_API_KEY`** : sans elle, le chatbot fonctionne quand même. Il suit son script de qualification et enregistre les leads ; il perd seulement la capacité à répondre aux questions hors script.
 - **Après avoir ajouté les variables, il faut redéployer.** Vercel ne les applique pas au déploiement déjà en ligne : Deployments → le plus récent → `…` → **Redeploy**.
 
@@ -81,6 +81,57 @@ Même chose pour les deux jetons GitHub échangés plus tôt : GitHub → Settin
 
 ---
 
+## 3 bis. Ce que le test a révélé — les variables étaient sur le mauvais périmètre
+
+Premier essai du formulaire en production : « L'envoi n'a pas fonctionné ». Les journaux du serveur donnent la raison exacte :
+
+```
+[leads] notification échouée: resend_not_configured
+```
+
+Et aucune trace d'écriture en base — donc Supabase n'était pas joignable non plus.
+
+### La cause
+
+Les huit variables existaient bien sur Vercel, mais toutes étaient rattachées au seul environnement **Development**. C'est l'environnement de la machine du développeur, pas celui du site en ligne. Le site en production ne voyait donc **aucune** de ces variables.
+
+C'est un piège classique de l'interface Vercel : quand on ajoute une variable, le périmètre proposé n'est pas toujours « tous les environnements », et rien ne signale ensuite que la production est laissée de côté.
+
+### Correction
+
+Chaque variable est passée en **All Environments** (Production + Preview + Development) :
+
+`SUPABASE_URL` · `SUPABASE_SERVICE_ROLE_KEY` · `RESEND_API_KEY` · `RESEND_FROM` · `CONTACT_TO_EMAIL` · `IP_HASH_SALT` · `GROQ_API_KEY`
+
+J'ai aussi ajouté **`NEXT_PUBLIC_SITE_URL` = `https://oussamaabassi.com`**, qui manquait. Elle sert aux URL canoniques et aux images de partage : sans elle, les métadonnées pointaient vers l'adresse `.vercel.app` au lieu de ton domaine.
+
+`OWNER_EMAIL` est laissée telle quelle : elle n'est pas utilisée par le code, c'est un reste. Tu peux la supprimer.
+
+Puis redéploiement en production — les variables ne s'appliquent jamais à un déploiement déjà construit.
+
+### Resend
+
+Le domaine est **vérifié** (constaté le 29/07, région Irlande). `RESEND_FROM` est donc réglé sur `contact@oussamaabassi.com`.
+
+---
+
+## 3 ter. Google Search Console — validé
+
+La propriété n'était **pas** validée : Google répondait « vous n'avez pas accès à cette propriété ». L'enregistrement TXT que tu as collé chez Hostinger est bien en place — vérifié par requête DNS directe :
+
+```
+oussamaabassi.com  TXT  google-site-verification=_SJ8F5WYV3xmExlDvyWHCylsc_-sATfoB8dkAWkvmWc
+```
+
+Il ne manquait que l'étape de validation côté Google, restée en suspens. Refaite :
+
+- Propriété **Domaine** `oussamaabassi.com` — **validée**, méthode « fournisseur de nom de domaine »
+- Sitemap `https://oussamaabassi.com/sitemap.xml` renvoyé le 30/07 pour forcer une nouvelle lecture (il y avait une lecture datant du 20 juillet, sur l'ancien site)
+
+Ne supprime pas cet enregistrement TXT : Google revérifie régulièrement, et sa disparition ferait perdre la validation.
+
+---
+
 ## 4. État général
 
 | Élément | État |
@@ -90,8 +141,8 @@ Même chose pour les deux jetons GitHub échangés plus tôt : GitHub → Settin
 | Cartes services non cliquables, avec le « comment » | fait |
 | SEO technique, données structurées | fait |
 | Message d'erreur du formulaire honnête | fait |
-| Domaine Resend | en attente de propagation |
-| Search Console | TXT collé par toi — validation à confirmer |
-| Variables Vercel | à coller (liste ci-dessus) |
-| Test bout en bout formulaire + chatbot | après les variables |
+| Domaine Resend | **vérifié** — envoi depuis contact@oussamaabassi.com |
+| Search Console | **validé**, sitemap renvoyé |
+| Variables Vercel | **corrigées** — toutes en Production, + NEXT_PUBLIC_SITE_URL ajoutée, redéployé |
+| Test bout en bout formulaire + chatbot | à finir (outil navigateur momentanément indisponible de mon côté) |
 | Revue mobile, performance, accessibilité | à faire |

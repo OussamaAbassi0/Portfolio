@@ -195,6 +195,13 @@ export const en: Dict = {
         url: "https://www.malt.fr/profile/oussamaabassi1",
         text: "I had the opportunity to work with Oussama on automation projects and strongly recommend him. He has perfect command of n8n and was able to transform complex manual processes into smooth, efficient workflows. Oussama is not only technical — he also has a genuine business vision to save time. A reliable and highly responsive expert.",
       },
+      {
+        name: "Tristan",
+        role: "Upwork client",
+        platform: "Upwork",
+        url: "https://www.upwork.com/freelancers/~01e9d7e582881baac8",
+        text: "Perfect!",
+      },
     ],
     all: "See all Upwork reviews",
   },
