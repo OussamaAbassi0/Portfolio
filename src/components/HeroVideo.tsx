@@ -34,7 +34,20 @@ export default function HeroVideo({ alt }: { alt: string }) {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const coarse = window.matchMedia("(pointer: coarse)").matches;
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    const lite = reduce || coarse || conn?.saveData === true;
+
+    /**
+     * Le scrub tourne aussi sur mobile, mais allégé.
+     * Avant, tout pointeur tactile recevait une image fixe : économique, mais le
+     * bloc paraissait mort. Ici on garde le mouvement en divisant le coût par
+     * trois — une image sur trois, décodées à mi-résolution.
+     *
+     * Deux cas restent en image fixe, et c'est volontaire : quelqu'un qui a
+     * demandé moins d'animations à son système, et quelqu'un en mode économie
+     * de données. Dans ces deux cas, la personne a exprimé un choix.
+     */
+    const still = reduce || conn?.saveData === true;
+    const step = coarse ? 3 : 1;
+    const decodeW = coarse ? 372 : W;
 
     let cancelled = false;
     let raf = 0;
@@ -51,7 +64,18 @@ export default function HeroVideo({ alt }: { alt: string }) {
       try {
         const res = await fetch(src(i));
         const blob = await res.blob();
-        const bmp = await createImageBitmap(blob);
+        // Décoder plus petit sur mobile : chaque image décodée occupe la mémoire
+        // de sa surface, pas celle de son fichier. 77 images pleine taille en
+        // mémoire, c'est ce qui fait tomber un onglet sur téléphone.
+        let bmp: ImageBitmap;
+        try {
+          bmp =
+            decodeW < W
+              ? await createImageBitmap(blob, { resizeWidth: decodeW, resizeQuality: "medium" })
+              : await createImageBitmap(blob);
+        } catch {
+          bmp = await createImageBitmap(blob);
+        }
         if (cancelled) {
           bmp.close();
           return;
@@ -67,12 +91,12 @@ export default function HeroVideo({ alt }: { alt: string }) {
       if (cancelled) return;
       paint(0);
       setReady(true);
-      if (lite) return;
+      if (still) return;
 
       // Chargement progressif : d'abord une image sur quatre pour que le scrub
       // soit utilisable très vite, puis on comble les trous.
-      for (let i = 0; i < FRAME_COUNT; i += 4) await load(i);
-      for (let i = 0; i < FRAME_COUNT; i++) {
+      for (let i = 0; i < FRAME_COUNT; i += 4 * step) await load(i);
+      for (let i = 0; i < FRAME_COUNT; i += step) {
         if (cancelled) return;
         await load(i);
       }
@@ -80,7 +104,7 @@ export default function HeroVideo({ alt }: { alt: string }) {
 
     boot();
 
-    if (lite) {
+    if (still) {
       return () => {
         cancelled = true;
       };
@@ -108,10 +132,23 @@ export default function HeroVideo({ alt }: { alt: string }) {
       paint(use);
       raf = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(tick);
+
+    /* La boucle ne tourne que tant que le bloc est à l'écran. Sans ça, elle
+       continue de s'exécuter soixante fois par seconde pendant qu'on lit le bas
+       de la page — invisible à l'œil, très visible sur la batterie d'un
+       téléphone. */
+    const io = new IntersectionObserver(
+      ([e]) => {
+        cancelAnimationFrame(raf);
+        if (e.isIntersecting) raf = requestAnimationFrame(tick);
+      },
+      { rootMargin: "120px" },
+    );
+    io.observe(wrap);
 
     return () => {
       cancelled = true;
+      io.disconnect();
       cancelAnimationFrame(raf);
       frames.current.forEach((b) => b?.close());
       frames.current = Array(FRAME_COUNT).fill(null);
