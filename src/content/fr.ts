@@ -218,6 +218,13 @@ export const fr: Dict = {
         url: "https://www.upwork.com/freelancers/~01e9d7e582881baac8",
         text: "Parfait !",
       },
+      {
+        name: "Jean",
+        role: "AfricartMarket · Pipeline data & LLM",
+        platform: "Upwork",
+        url: "https://www.upwork.com/freelancers/~01e9d7e582881baac8",
+        text: "Excellent",
+      },
     ],
     all: "Voir tous les avis Upwork",
   },

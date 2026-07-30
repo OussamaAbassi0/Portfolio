@@ -97,7 +97,7 @@ export const casesFr: CaseStudy[] = [
   /* ------------------------------------------------------------------ */
   {
     slug: "marketplace-art",
-    client: "Place de marché d'enchères d'art",
+    client: "Jean · AfricartMarket",
     sector: "E-commerce · marché de l'art",
     duration: "mai – juin 2026",
     title: "50 000 œuvres agrégées, nettoyées et publiées pour 5,51 $.",
